@@ -6,23 +6,57 @@
 </head>
 <body>
 <script>
-    // Variable for the array of string choices rock, paper and scissors for the computer
-    var computerChoice = [
-        "Rock",
-        "Paper",
-        "Scissors"
+    // Variable for an array of string choices rock, paper and scissors for the computer to choose from.
+    let computerChoice = [
+        "rock",
+        "paper",
+        "scissors"
     ]
-    // function that returns randomly a string from the computerChoice array 
+    // Function that returns randomly a string of Rock, Paper or Scissors from the computerChoice array. 
     function computerPlay() {
         return computerChoice[Math.floor(Math.random()*computerChoice.length)];
     }
 
-    // function that plays a round of rock, paper, scissors. 
+    // Prompts the user to enter a response for the game. The function then cleans the string entered to be all lower case only.The function returns the lowered cased user string.   
+    function userPlay() {
+        let userChoice = prompt("Rock, Paper or Scissors, what is your selection?");
+        let loweredUserChoice = userChoice.toLowerCase();
+        return loweredUserChoice
+    }
+ 
+    // Function that plays a round of rock, paper, scissors with the computer. The Computer Selection uses the function computerPlay to pick the computer choice. The Player Selection comes from the userPlay function. Variables for win conditions for player (playerWin) and computer (computerWin), using variables for player selection and computer selection. If the user choice and the computer choice are the same, the function returns the string Draw! If the player wins, the function returns playerWin variable. If the computer wins the function returns computerWin variable.   
     function playRound(playerSelection, computerSelection) {
+        playerSelection = userPlay();
+        computerSelection = computerPlay();
 
-        
+        playerWin = "You win! " + playerSelection + " beats " + computerSelection  
+        computerWin = "Computer wins! " + computerSelection + " beats " + playerSelection
+
+        if (playerSelection == computerSelection) {
+            return "Draw!"
+        } else if (playerSelection == "rock" && computerSelection == "scissors") {
+            return playerWin
+        } else if (playerSelection == "paper" && computerSelection == "rock") {
+            return playerWin
+        } else if (playerSelection == "scissors" && computerSelection == "paper") {
+            return playerWin
+        } else if (computerSelection == "rock" && playerSelection == "scissors") {
+            return computerWin
+        } else if (computerSelection == "paper" && playerSelection == "rock") {
+            return computerWin
+        } else if (computerSelection == "scissors" && playerSelection == "paper") {
+            return computerWin
+        }
     }
 
+    //Game function
+    //
+    function game() {
+        
+    }
+//console.log(computerPlay())
+//console.log(userPlay())
+console.log(playRound())
 </script>
 </body>
 </html>
