@@ -6,57 +6,94 @@
 </head>
 <body>
 <script>
+    // computerChoice Array
     // Variable for an array of string choices rock, paper and scissors for the computer to choose from.
     let computerChoice = [
         "rock",
         "paper",
         "scissors"
     ]
+
+    // computerPlay function
     // Function that returns randomly a string of Rock, Paper or Scissors from the computerChoice array. 
     function computerPlay() {
         return computerChoice[Math.floor(Math.random()*computerChoice.length)];
     }
 
-    // Prompts the user to enter a response for the game. The function then cleans the string entered to be all lower case only.The function returns the lowered cased user string.   
+    // userPlay function
+    // Prompts the user to enter a response for the game. The function then lowercases the string entered.The function returns the lowered cased user string.   
     function userPlay() {
         let userChoice = prompt("Rock, Paper or Scissors, what is your selection?");
         let loweredUserChoice = userChoice.toLowerCase();
         return loweredUserChoice
     }
- 
-    // Function that plays a round of rock, paper, scissors with the computer. The Computer Selection uses the function computerPlay to pick the computer choice. The Player Selection comes from the userPlay function. Variables for win conditions for player (playerWin) and computer (computerWin), using variables for player selection and computer selection. If the user choice and the computer choice are the same, the function returns the string Draw! If the player wins, the function returns playerWin variable. If the computer wins the function returns computerWin variable.   
-    function playRound(playerSelection, computerSelection) {
-        playerSelection = userPlay();
-        computerSelection = computerPlay();
 
-        playerWin = "You win! " + playerSelection + " beats " + computerSelection  
-        computerWin = "Computer wins! " + computerSelection + " beats " + playerSelection
+    //Score variables
+    // Set variables for player score and computer score.
+    let playerScore = 0;
+    let computerScore = 0;
+
+    //playRound function
+    // Function that plays a round of rock, paper, scissors with the computer. The functions logs the computer and players choice. If the user choice and the computer choice are the same, the function logs Draw! and returns nothing. If the player wins, the function logs You win message with scores for each round. The player winning also returns playerScore +1. If the computer wins the function returns computer wins message and the score of the game. The computer wins also increases the computerScore + 1.   
+    function playRound(playerSelection, computerSelection) {
+        console.log("Computer plays " + computerSelection)
+        console.log("Player plays " + playerSelection)
+
 
         if (playerSelection == computerSelection) {
-            return "Draw!"
+            console.log("Draw!");
+            console.log("Player Score:" + playerScore + " Computer Score:" + computerScore);
+            return; 
         } else if (playerSelection == "rock" && computerSelection == "scissors") {
-            return playerWin
+            console.log("You win! " + playerSelection + " beats " + computerSelection);
+            console.log("Player Score:" + playerScore + " Computer Score:" + computerScore);
+            return playerScore++;
         } else if (playerSelection == "paper" && computerSelection == "rock") {
-            return playerWin
+            console.log("You win! " + playerSelection + " beats " + computerSelection);
+            console.log("Player Score:" + playerScore + " Computer Score:" + computerScore);
+            return playerScore++;
         } else if (playerSelection == "scissors" && computerSelection == "paper") {
-            return playerWin
+            console.log("You win! " + playerSelection + " beats " + computerSelection);
+            console.log("Player Score:" + playerScore + " Computer Score:" + computerScore);
+            return playerScore++;
         } else if (computerSelection == "rock" && playerSelection == "scissors") {
-            return computerWin
+            console.log("Computer wins! " + computerSelection + " beats " + playerSelection);
+            console.log("Player Score:" + playerScore + " Computer Score:" + computerScore);
+            return computerScore++;
         } else if (computerSelection == "paper" && playerSelection == "rock") {
-            return computerWin
+            console.log("Computer wins! " + computerSelection + " beats " + playerSelection);
+            console.log("Player Score:" + playerScore + " Computer Score:" + computerScore);
+            return computerScore++;
         } else if (computerSelection == "scissors" && playerSelection == "paper") {
-            return computerWin
+            console.log("Computer wins! " + computerSelection + " beats " + playerSelection);
+            console.log("Player Score:" + playerScore + " Computer Score:" + computerScore);
+            return computerScore++;
         }
     }
 
     //Game function
-    //
+    //A function that uses the playRound function to play a round of Rock, Paper and Scissors 5 times. Once the game reaches 5 rounds played the function stops playing. At the end of the 5 rounds a winner is declared and cosole logs from the player and computer. If the score is tied the console logs Tie Game!. The function will also log the final score for the player and computer. 
     function game() {
+        let round = 1;
         
+        while (round <= 5) {
+            playRound(userPlay(), computerPlay());
+            round++;
+        }
+
+        if (playerScore > computerScore) {
+            console.log("Player Wins! Congratulations!")
+        } else if (computerScore > playerScore) {
+            console.log ("Computer Wins! Better luck next game!")
+        } else {
+            console.log("Tie Game!")
+        }
+
+        console.log("Player Score:" + playerScore + " Computer Score:" + computerScore);
+
     }
-//console.log(computerPlay())
-//console.log(userPlay())
-console.log(playRound())
+
+game();
 </script>
 </body>
 </html>
